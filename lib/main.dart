@@ -246,6 +246,15 @@ class _SquareBreathingPageState extends State<SquareBreathingPage>
                 _buildModePicker(),
                 const SizedBox(height: 14),
                 _buildModeControl(),
+                const SizedBox(height: 10),
+                Text(
+                  _mode == SessionMode.timer
+                      ? 'Session ${_formatClock(_totalSecondsRemaining)}'
+                      : 'Round ${_roundsCompleted + (_running ? 1 : 0)} of $_selectedRounds',
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: const Color(0xFFA8B3C9),
+                  ),
+                ),
                 const Spacer(),
                 AnimatedBuilder(
                   animation: _pulseController,
@@ -293,15 +302,6 @@ class _SquareBreathingPageState extends State<SquareBreathingPage>
                     color: const Color(0xFFD2D8E6),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  _mode == SessionMode.timer
-                      ? 'Session ${_formatClock(_totalSecondsRemaining)}'
-                      : 'Round ${_roundsCompleted + (_running ? 1 : 0)} of $_selectedRounds',
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: const Color(0xFFA8B3C9),
-                  ),
-                ),
                 const Spacer(),
                 SizedBox(
                   width: double.infinity,
@@ -328,27 +328,31 @@ class _SquareBreathingPageState extends State<SquareBreathingPage>
   }
 
   Widget _buildModePicker() {
-    return SegmentedButton<SessionMode>(
-      segments: const [
-        ButtonSegment(value: SessionMode.timer, label: Text('Fixed Timer')),
-        ButtonSegment(value: SessionMode.rounds, label: Text('Rounds')),
-      ],
-      selected: {_mode},
-      onSelectionChanged: _running
-          ? null
-          : (selection) {
-              setState(() {
-                _mode = selection.first;
-                if (_mode == SessionMode.timer) {
-                  _totalSecondsRemaining = _selectedTimerMinutes * 60;
-                }
-              });
-            },
-      style: ButtonStyle(
-        textStyle: WidgetStatePropertyAll(
-          Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+    return SizedBox(
+      width: double.infinity,
+      child: SegmentedButton<SessionMode>(
+        segments: const [
+          ButtonSegment(value: SessionMode.timer, label: Text('Fixed Timer')),
+          ButtonSegment(value: SessionMode.rounds, label: Text('Rounds')),
+        ],
+        selected: {_mode},
+        expandedInsets: EdgeInsets.zero,
+        onSelectionChanged: _running
+            ? null
+            : (selection) {
+                setState(() {
+                  _mode = selection.first;
+                  if (_mode == SessionMode.timer) {
+                    _totalSecondsRemaining = _selectedTimerMinutes * 60;
+                  }
+                });
+              },
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(
+            Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+          ),
         ),
       ),
     );
