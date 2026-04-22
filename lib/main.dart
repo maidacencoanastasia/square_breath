@@ -309,7 +309,7 @@ class _SquareBreathingPageState extends State<SquareBreathingPage>
                     onPressed: _running ? _stopSession : _startSession,
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: const Color(0xFFDEE6FF),
+                      backgroundColor: const Color(0xFFB5C9FF ),
                       foregroundColor: const Color(0xFF161A22),
                       textStyle: textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
