@@ -264,19 +264,19 @@ class _SquareBreathingPageState extends State<SquareBreathingPage>
                       width: side,
                       height: side,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE6ECFF).withValues(alpha: 0.1),
+                        color: const Color(0xFFF1E8FF).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(28),
                         border: Border.all(
                           width: 2,
                           color: const Color(
-                            0xFFE6ECFF,
+                            0xFFF1E8FF,
                           ).withValues(alpha: 0.35),
                         ),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 40,
                             spreadRadius: 2,
-                            color: const Color(0xFF9CB8FF).withValues(
+                            color: const Color(0xFFAE84FF).withValues(
                               alpha: 0.12 + (_pulseController.value * 0.14),
                             ),
                           ),
